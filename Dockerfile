@@ -21,14 +21,14 @@ FROM alpine:3.10
 # process wrapper
 LABEL maintainer "sebs sebsclub@outlook.com"
 
-# V2RAY
+# V2Y
 ARG TZ="Asia/Shanghai"
 
 ENV TZ ${TZ}
-ENV V2RAY_VERSION v4.25.1 
-ENV V2RAY_LOG_DIR /var/log/v2ray
-ENV V2RAY_CONFIG_DIR /etc/v2ray/
-ENV V2RAY_DOWNLOAD_URL https://github.com/v2ray/v2ray-core/releases/download/${V2RAY_VERSION}/v2ray-linux-64.zip
+ENV V2Y_VERSION v4.25.1 
+ENV V2Y_LOG_DIR /var/log/v2y
+ENV V2Y_CONFIG_DIR /etc/v2y/
+ENV V2Y_DOWNLOAD_URL https://github.com/v2ray/v2ray-core/releases/download/${V2RAY_VERSION}/v2ray-linux-64.zip
 
 RUN apk upgrade --update \
     && apk add \
@@ -38,19 +38,19 @@ RUN apk upgrade --update \
     && mkdir -p \ 
         ${V2RAY_LOG_DIR} \
         ${V2RAY_CONFIG_DIR} \
-        /tmp/v2ray \
-    && curl -L -H "Cache-Control: no-cache" -o /tmp/v2ray/v2ray.zip ${V2RAY_DOWNLOAD_URL} \
+        /tmp/v2y \
+    && curl -L -H "Cache-Control: no-cache" -o /tmp/v2y/v2y.zip ${V2RAY_DOWNLOAD_URL} \
     && pwd \
-    && unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray/ \
-    && mv /tmp/v2ray/v2ray /usr/bin \
-    && mv /tmp/v2ray/v2ctl /usr/bin \
-    && mv /tmp/v2ray/vpoint_vmess_freedom.json /etc/v2ray/config.json \
-    && chmod +x /usr/bin/v2ray \
+    && unzip /tmp/v2ray/v2y.zip -d /tmp/v2y/ \
+    && mv /tmp/v2y/v2ray /usr/bin/v2y \
+    && mv /tmp/v2y/v2ctl /usr/bin \
+    && mv /tmp/v2y/vpoint_vmess_freedom.json /etc/v2y/config.json \
+    && chmod +x /usr/bin/v2y \
     && chmod +x /usr/bin/v2ctl \
     && apk del curl \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    && rm -rf /tmp/v2ray /var/cache/apk/*
+    && rm -rf /tmp/v2y /var/cache/apk/*
 
 # ADD entrypoint.sh /entrypoint.sh
 WORKDIR /srv
