@@ -6,7 +6,7 @@ FROM abiosoft/caddy:builder as builder
 # add this line before you run `/bin/sh /usr/bin/builder.sh`
 ADD https://raw.githubusercontent.com/jeffreystoke/caddy-docker/master/builder/builder.sh /usr/bin/builder.sh
 
-ARG version="1.0.4"
+ARG version="1.0.3"
 ARG plugins="webdav"
 ARG enable_telemetry="false"
 
