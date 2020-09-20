@@ -6,8 +6,8 @@ FROM abiosoft/caddy:builder as builder
 # add this line before you run `/bin/sh /usr/bin/builder.sh`
 ADD https://raw.githubusercontent.com/jeffreystoke/caddy-docker/master/builder/builder.sh /usr/bin/builder.sh
 
-ARG version="1.0.3"
-ARG plugins=""
+ARG version="1.0.4"
+ARG plugins="webdav"
 ARG enable_telemetry="false"
 
 
@@ -28,7 +28,7 @@ ENV TZ ${TZ}
 ENV V2Y_VERSION v4.25.1 
 ENV V2Y_LOG_DIR /var/log/v2y
 ENV V2Y_CONFIG_DIR /etc/v2y/
-ENV V2Y_DOWNLOAD_URL https://github.com/v2ray/v2ray-core/releases/download/${V2RAY_VERSION}/v2ray-linux-64.zip
+ENV V2Y_DOWNLOAD_URL https://github.com/v2ray/v2ray-core/releases/download/${V2Y_VERSION}/v2ray-linux-64.zip
 
 RUN apk upgrade --update \
     && apk add \
@@ -36,10 +36,10 @@ RUN apk upgrade --update \
         tzdata \
         curl \
     && mkdir -p \ 
-        ${V2RAY_LOG_DIR} \
-        ${V2RAY_CONFIG_DIR} \
+        ${V2Y_LOG_DIR} \
+        ${V2Y_CONFIG_DIR} \
         /tmp/v2y \
-    && curl -L -H "Cache-Control: no-cache" -o /tmp/v2y/v2y.zip ${V2RAY_DOWNLOAD_URL} \
+    && curl -L -H "Cache-Control: no-cache" -o /tmp/v2y/v2y.zip ${V2Y_DOWNLOAD_URL} \
     && pwd \
     && unzip /tmp/v2y/v2y.zip -d /tmp/v2y/ \
     && mv /tmp/v2y/v2ray /usr/bin/v2y \
