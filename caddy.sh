@@ -25,14 +25,23 @@ sed -i "s/domain/${domain}/" /etc/Caddyfile
 # v2ray
 cat > /etc/v2ray/config.json <<'EOF'
 {
+  "reverse": {
+      "bridge":[
+        {
+          "tag":"bridge",
+          "domain":"tx.localhost"
+        }
+      ]
+  },
   "inbounds": [
     {
+      "tag":"tunnel",
       "port": 2333,
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "uuid",
+            "id": "ca666750-1991-4e8b-9455-a4c2dfed7679",
             "alterId": 64
           }
         ]
@@ -47,10 +56,25 @@ cat > /etc/v2ray/config.json <<'EOF'
   ],
   "outbounds": [
     {
+      "tag":"out",
       "protocol": "freedom",
       "settings": {}
     }
-  ]
+  ],
+  "routing": {
+      "rules": [
+        {
+          "type": "field",
+          "inboundTag": [
+            "tunnel"
+          ],
+          "domain": [
+            "full:tx.localhost"
+          ],
+          "outboundTag": "out"
+        }
+      ]
+    }
 }
 
 EOF
