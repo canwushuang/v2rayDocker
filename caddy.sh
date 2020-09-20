@@ -10,13 +10,35 @@ else
     uuid="$3"
 fi
 cat > /etc/Caddyfile <<'EOF'
-domain
-{
-  log ./caddy.log
-  proxy /one :2333 {
-    websocket
-    header_upstream -Origin
+localhost:18443 {
+        basicauth / xiaohu Zxhxls85372432!
+        webdav / {
+            scope /media/gdrive
+            allow_r regex
+            modify false
+        }
+}
+domain:8080 {
+        gzip
+        proxy / 127.0.0.1:18080 {
+          websocket
+          transparent
+        }
+}
+
+domain {
+        log ./caddy.log
+        proxy /one :2333 {
+          websocket
+          header_upstream -Origin
   }
+}
+
+domain:18081 {
+        proxy / https://ttt.us-south.cf.appws.swins.top.cloud {
+          websocket
+          header_upstream -Origin
+        }
 }
 
 EOF
