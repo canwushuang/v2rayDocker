@@ -11,7 +11,7 @@ else
 fi
 cat > /etc/Caddyfile <<'EOF'
 localhost:18443 {
-        basicauth / xiaohu Zxhxls85372432!
+        basicauth / user password
         webdav / {
             scope /media/gdrive
             allow_r regex
