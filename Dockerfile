@@ -41,7 +41,7 @@ RUN apk upgrade --update \
         /tmp/v2y \
     && curl -L -H "Cache-Control: no-cache" -o /tmp/v2y/v2y.zip ${V2RAY_DOWNLOAD_URL} \
     && pwd \
-    && unzip /tmp/v2ray/v2y.zip -d /tmp/v2y/ \
+    && unzip /tmp/v2y/v2y.zip -d /tmp/v2y/ \
     && mv /tmp/v2y/v2ray /usr/bin/v2y \
     && mv /tmp/v2y/v2ctl /usr/bin \
     && mv /tmp/v2y/vpoint_vmess_freedom.json /etc/v2y/config.json \
