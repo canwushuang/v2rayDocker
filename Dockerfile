@@ -25,10 +25,10 @@ LABEL maintainer "sebs sebsclub@outlook.com"
 ARG TZ="Asia/Shanghai"
 
 ENV TZ ${TZ}
-ENV V2Y_VERSION v4.25.1 
+ENV V2Y_VERSION v4.28.2 
 ENV V2Y_LOG_DIR /var/log/v2y
 ENV V2Y_CONFIG_DIR /etc/v2y/
-ENV V2Y_DOWNLOAD_URL https://github.com/v2ray/v2ray-core/releases/download/${V2Y_VERSION}/v2ray-linux-64.zip
+ENV V2Y_DOWNLOAD_URL https://github.com/v2fly/v2ray-core/releases/download/${V2Y_VERSION}/v2ray-linux-64.zip
 
 RUN apk upgrade --update \
     && apk add \
