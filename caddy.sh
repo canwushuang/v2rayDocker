@@ -23,7 +23,7 @@ EOF
 sed -i "s/domain/${domain}/" /etc/Caddyfile
 
 # v2ray
-cat > /etc/v2ray/config.json <<'EOF'
+cat > /etc/v2y/config.json <<'EOF'
 {
   "reverse": {
       "bridge":[
@@ -79,7 +79,7 @@ cat > /etc/v2ray/config.json <<'EOF'
 
 EOF
 
-sed -i "s/uuid/${uuid}/" /etc/v2ray/config.json
+sed -i "s/uuid/${uuid}/" /etc/v2y/config.json
 
 cat > /srv/sebs.js <<'EOF'
  {
@@ -109,7 +109,7 @@ cp /etc/Caddyfile .
 nohup /bin/parent caddy  --log stdout --agree=false &
 echo "配置 JSON 详情"
 echo " "
-cat /etc/v2ray/config.json
+cat /etc/v2y/config.json
 echo " "
 node v2ray.js
-/usr/bin/v2ray -config /etc/v2ray/config.json
+/usr/bin/v2y -config /etc/v2y/config.json
